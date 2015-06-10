@@ -1,20 +1,19 @@
-OSG Connect Quickstart
-======================
+# OSG Connect Quickstart
 
-Login to OSG Connect
---------------------
+## Login to OSG Connect
 
-If not already registered to OSG Connect, go to the registration site
-(http://ci-connect.uchicago.edu/) and follow instructions there.  Once
-registered you are authorized to use login.osgconnect.net (the Condor
-submit host) and stash.osgconnect.net (the data host), in each case
-authenticating with your network ID (netid) and password.
+If you have not already registered for OSG Connect, go to [the
+registration site][registration] and follow the instructions there.
+Once registered, you are authorized to use `login.osgconnect.net` (the
+Condor submit host) and `stash.osgconnect.net` (the data host), in each
+case authenticating with your OSG Connect ID and password.
 
-Set up the tutorial
--------------------
-You may perform the examples in the tutorial by typing them in from the
-text below, or by using tutorial files already on login.osgconnect.net.
-It's your choice; the tutorial is the same either way. 
+## Set up the tutorial
+
+You may perform the examples in the tutorial by typing them
+in from the text below, or by using tutorial files already on
+`login.osgconnect.net`.  It's your choice; the tutorial is the same
+either way.
 
 
 ### Pretyped setup
@@ -37,6 +36,7 @@ Now, run the quickstart tutorial:
 
 
 ### Manual setup 
+
 Alternatively, if you want the full manual experience, create a new
 directory for the tutorial work: 
 
@@ -45,6 +45,7 @@ directory for the tutorial work:
 
 Tutorial jobs
 -------------
+
 ### Job 1: A simple, nonparallel job
 
 Inside the tutorial directory that you created or installed previously,
@@ -360,3 +361,5 @@ the jobs in the job submission and condor_rm [username] will remove
 all jobs belonging to the user. The condor_rm documenation has more
 details on using condor_rm including ways to remove jobs based on other
 constraints.
+
+[registration]: https://osgconnect.net/signup
