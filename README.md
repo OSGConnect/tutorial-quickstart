@@ -340,9 +340,8 @@ HTML page. You can have bar plots, pie charts and more.
 Workload Analysis 
 -----------------
 
-Our Cycleserver website is an analytics tool that users should keep at
-hand while submitting jobs into OSG Connect. You can visit it here:
-http://monitor.osgconnect.net
+OSG Connect also has a page that provides job analytics on running and recently completed jobs. You can visit it here:
+http://osgconnect.net/metrics/user
 
 
 Removing jobs
