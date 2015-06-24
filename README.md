@@ -283,6 +283,7 @@ also dial down our sleep time from 15 seconds to 5.
 	Queue 10
 
 And let's submit:
+
 	$ condor_submit tutorial03
 	Submitting job(s)....................................................................................................
 	10 job(s) submitted to cluster 938. 
@@ -340,8 +341,7 @@ HTML page. You can have bar plots, pie charts and more.
 Workload Analysis 
 -----------------
 
-OSG Connect also has a page that provides job analytics on running and recently completed jobs. You can visit it here:
-http://osgconnect.net/metrics/user
+OSG Connect also has a page that provides job analytics on running and recently completed jobs. You can visit it [here](http://osgconnect.net/metrics/user).
 
 
 Removing jobs
