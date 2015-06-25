@@ -136,7 +136,7 @@ To see the projects you belong to, you can use the command
 You can join projects after you login at <https://portal.osgconnect.net/>
 . Within minutes of joining and being approved for a project, you will
 have access via condor_submit as well. For more information on creating
-a project, please see [this page](https://confluence.grid.iu.edu/display/CON/Start+a+Project+with+OSG+Connect).
+a project, please see [this page](http://support.opensciencegrid.org/support/solutions/articles/5000634360)
 
 You have two ways to set the project name for your jobs:
 
