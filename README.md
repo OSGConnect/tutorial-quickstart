@@ -348,16 +348,16 @@ Removing jobs
 
 On occasion, jobs will need to be removed for a variety of reasons
 (incorrect parameters, errors in submission, etc.). In these instances,
-the condor_rm command can be used to remove an entire job submission
-or just particular jobs in a submission. The condor_rm command accepts
+the `condor_rm` command can be used to remove an entire job submission
+or just particular jobs in a submission. The `condor_rm` command accepts
 a cluster id, a job id, or username and will remove an entire cluster
 of jobs, a single job, or all the jobs belonging to a given user
 respectively. E.g. if a job submission generates 100 jobs and is
-assigned a cluster id of 103, then condor_rm 103.0 will remove the
-first job in the cluster. Likewise, condor_rm 103 will remove all
-the jobs in the job submission and condor_rm [username] will remove
-all jobs belonging to the user. The condor_rm documenation has more
-details on using condor_rm including ways to remove jobs based on other
+assigned a cluster id of 103, then `condor_rm 103.0` will remove the
+first job in the cluster. Likewise, `condor_rm 103` will remove all
+the jobs in the job submission and `condor_rm [username]` will remove
+all jobs belonging to the user. The `condor_rm` documenation has more
+details on using `condor_rm` including ways to remove jobs based on other
 constraints.
 
 [You can register at https://osgconnect.net/signup](https://osgconnect.net/signup)
