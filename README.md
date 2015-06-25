@@ -18,7 +18,7 @@ either way.
 
 ### Pretyped setup
 To save some typing, you can install the tutorial into your home
-directory from login.osgconnect.net. This is highly recommended to
+directory from `login.osgconnect.net`. This is highly recommended to
 ensure that you don't encounter transcription errors during the
 tutorials. 
 
@@ -124,7 +124,7 @@ message like:
 	OSG-Staff
 
 To see the projects you belong to, you can use the command
-osgconnect_show_projects:
+`osgconnect_show_projects`:
 
 	$ connect show_projects
 	Based on username (dgc), here is a list of projects you might have
@@ -133,16 +133,15 @@ osgconnect_show_projects:
 
 ### More about projects
 
-You can join projects after you login at https://portal.osgconnect.net/
+You can join projects after you login at <https://portal.osgconnect.net/>
 . Within minutes of joining and being approved for a project, you will
 have access via condor_submit as well. For more information on creating
-a project, please see
-https://confluence.grid.iu.edu/display/CON/Start+a+Project+with+OSG+Connect 
+a project, please see [this page](https://confluence.grid.iu.edu/display/CON/Start+a+Project+with+OSG+Connect).
 
 You have two ways to set the project name for your jobs:
 
-1. Add the +ProjectName="MyProject" line to the HTCondor submit file. Remember to quote the project name!
-2. Create in your home directory a file with your default project name: $HOME/.osg_default_project
+1. Add the `+ProjectName="MyProject"` line to the HTCondor submit file. Remember to quote the project name!
+2. Create in your home directory a file with your default project name: `$HOME/.osg_default_project`
 
 If you do not set a project name, or you use a project that you're not
 a member of, then your job submission will fail.
@@ -198,7 +197,7 @@ When your job has completed, it will disappear from the list.
 ### Job history
 
 Once your job has finished, you can get information about its execution
-from the condor_history command: 
+from the `condor_history` command: 
 
 	$ condor_history 823
 	 ID      OWNER            SUBMITTED     RUN_TIME ST   COMPLETED CMD
@@ -293,7 +292,7 @@ And let's submit:
 
 When we start submitting many simultaneous jobs into the queue, it might
 be worth looking at where they run. To get that information, we'll use a
-couple of condor_history commands. First, run condor_history -long jobid
+couple of `condor_history` commands. First, run `condor_history -long jobid`
 for your first job. Again the output is quite long:
 
 	$ condor_history -long 938
@@ -305,7 +304,7 @@ for your first job. Again the output is quite long:
 	... 
 
 Looking through here for a hostname, we can see that the parameter
-that we want to know is LastRemoteHost. That's what job slot our job
+that we want to know is `LastRemoteHost`. That's what job slot our job
 ran on. With that detail, we can construct a shell command to get
 the execution node for each of our 100 jobs, and we can plot the
 spread. LastRemoteHost normally combines a slot name and a host name,
@@ -329,7 +328,7 @@ interesting distribution output.
 	...
 
 The distribution program reduces a list of hostnames to a set of
-hostnames with no duplication (much like sort | uniq -c), but
+hostnames with no duplication (much like `sort | uniq -c`), but
 additionally plots a distribution histogram on your terminal
 window. This is nice for seeing how Condor selected your execution
 endpoints.
