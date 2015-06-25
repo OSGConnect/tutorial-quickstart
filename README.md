@@ -361,4 +361,4 @@ all jobs belonging to the user. The condor_rm documenation has more
 details on using condor_rm including ways to remove jobs based on other
 constraints.
 
-[registration]: https://osgconnect.net/signup
+[You can register at https://osgconnect.net/signup](https://osgconnect.net/signup)
