@@ -1,4 +1,4 @@
-# OSG Connect Quickstart
+[title]: - "OSG Connect Quickstart"
 
 ## Login to OSG Connect
 
