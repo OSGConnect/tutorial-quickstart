@@ -333,7 +333,7 @@ additionally plots a distribution histogram on your terminal
 window. This is nice for seeing how Condor selected your execution
 endpoints.
 
-There is also condor_plot a command that plots similar information in a
+There is also `condor_plot` a command that plots similar information in a
 HTML page. You can have bar plots, pie charts and more.
 
 
