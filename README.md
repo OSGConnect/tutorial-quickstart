@@ -178,7 +178,7 @@ it hasn't started yet. If it's currently scheduled and running, it will
 have state `R` (running). If it has completed already, it will not appear
 in `condor_q`. 
 
-Let's wait for your job to finish – that is, for condor_q not to show
+Let's wait for your job to finish – that is, for `condor_q` not to show
 the job in its output. A useful tool for this is watch – it runs a
 program repeatedly, letting you see how the output differs at fixed
 time intervals. Let's submit the job again, and watch `condor_q` output
