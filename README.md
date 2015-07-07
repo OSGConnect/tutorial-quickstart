@@ -5,7 +5,7 @@
 If you have not already registered for OSG Connect, go to [the
 registration site][registration] and follow the instructions there.
 Once registered, you are authorized to use `login.osgconnect.net` (the
-Condor submit host) and `stash.osgconnect.net` (the data host), in each
+HTCondor submit host) and `stash.osgconnect.net` (the data host), in each
 case authenticating with your OSG Connect ID and password.
 
 ## Set up the tutorial
@@ -70,8 +70,8 @@ Now, make the script executable.
 
 ### Run the job locally
 
-When setting up a new job type, it's important to test your job outside
-of Condor before submitting into the grid. 
+When setting up a new job submission, it's important to test your job outside
+of HTCondor before submitting into the grid. 
 
 	$ ./short.sh
 	Start time: Wed Aug 21 09:21:35 CDT 2013
@@ -135,7 +135,7 @@ To see the projects you belong to, you can use the command
 
 You can join projects after you login at <https://portal.osgconnect.net/>
 . Within minutes of joining and being approved for a project, you will
-have access via condor_submit as well. For more information on creating
+have access via `condor_submit` as well. For more information on creating
 a project, please see [this page](http://support.opensciencegrid.org/support/solutions/articles/5000634360)
 
 You have two ways to set the project name for your jobs:
@@ -148,7 +148,7 @@ a member of, then your job submission will fail.
 
 ### Submit the job 
 
-Submit the job using condor_submit:
+Submit the job using `condor_submit`:
 
 	$ condor_submit tutorial01
 	Submitting job(s). 
@@ -173,10 +173,10 @@ You can also get status on a specific job cluster:
 	 823.0   netid           8/21 09:46   0+00:00:10 R  0   0.0  short.sh
 	1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended
 
-Note the ST (state) column. Your job will be in the I state (idle) if
+Note the `ST` (state) column. Your job will be in the I state (idle) if
 it hasn't started yet. If it's currently scheduled and running, it will
-have state R (running). If it has completed already, it will not appear
-in condor_q. 
+have state `R` (running). If it has completed already, it will not appear
+in `condor_q`. 
 
 Let's wait for your job to finish – that is, for condor_q not to show
 the job in its output. A useful tool for this is watch – it runs a
@@ -204,7 +204,7 @@ from the `condor_history` command:
 	 823.0   netid            8/21 09:46   0+00:00:12 C   8/21 09:46 /home/netid/
 
 *Note*: You can see much more information about your job's final status
-using the -long option. 
+using the `-long` option. 
 
 
 ### Check the job output
@@ -213,7 +213,7 @@ Once your job has finished, you can look at the files that HTCondor has
 returned to the working directory. If everything was successful, it
 should have returned:
 
-* a log file from Condor for the job cluster: jog.log
+* a log file from HTCondor for the job cluster: jog.log
 * an output file for each job's output: job.output
 * an error file for each job's errors: job.error
 
@@ -235,7 +235,7 @@ Job 2: Submitting jobs concurrently
 What do we need to do to submit several jobs simultaneously? In the
 first example, Condor returned three files: out, error, and log. If we
 want to submit several jobs, we need to track these three files for each
-job. An easy way to do this is to add the $(Cluster) and $(Process)
+job. An easy way to do this is to add the `$(Cluster)` and `$(Process)`
 macros to the HTCondor submit file. Since this can make our working
 directory really messy with a large number of jobs, let's tell HTCondor
 to put the files in a directory called log. Here's what the second (less
