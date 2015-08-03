@@ -6,7 +6,8 @@ If you have not already registered for OSG Connect, go to [the
 registration site](http://osgconnect.net/signup) and follow the instructions there.
 Once registered, you are authorized to use `login.osgconnect.net` (the
 HTCondor submit host) and `stash.osgconnect.net` (the data host), in each
-case authenticating with your OSG Connect ID and password.
+case authenticating with your OSG Connect ID and password.  For the rest of the
+material on this page, you will need to ssh to `login.osgconnect.net`.
 
 ## Set up the tutorial
 
