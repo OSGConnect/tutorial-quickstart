@@ -1,6 +1,6 @@
 Universe = vanilla 
 Executable = short.sh 
-Arguments = 5 # to sleep 5 seconds 
+Arguments = 60 # to sleep 60 seconds 
 Error = log/job.err.$(Cluster)-$(Process) 
 Output = log/job.out.$(Cluster)-$(Process) 
 Log = log/job.log.$(Cluster) 
