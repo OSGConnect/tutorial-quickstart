@@ -10,6 +10,7 @@ request_memory = 1 GB
 # EXECUTABLE is the program your job will run It's often useful
 # to create a shell script to "wrap" your actual work.
 Executable = short.sh
+Arguments = 
 
 # ERROR and OUTPUT are the error and output channels from your job
 # that HTCondor returns from the remote host.
@@ -23,7 +24,7 @@ Log = job.log
 # Send the job to Held state on failure. 
 on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
 
-# Periodically retry the jobs every 60 seconds, up to a maximum of 5 retries.
+# Periodically retry the jobs every 1 hour, up to a maximum of 5 retries.
 periodic_release =  (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60*60)
 
 # QUEUE is the "start button" - it launches any jobs that have been
