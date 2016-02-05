@@ -33,7 +33,7 @@ tutorials.
 Now, run the quickstart tutorial:
 
 	$ tutorial quickstart 
-	$ cd ~/osg-quickstart 
+	$ cd tutorial-quickstart 
 
 
 ### Manual setup 
@@ -41,8 +41,8 @@ Now, run the quickstart tutorial:
 Alternatively, if you want the full manual experience, create a new
 directory for the tutorial work: 
 
-	$ mkdir osg-quickstart 
-	$ cd osg-quickstart
+	$ mkdir tutorial-quickstart 
+	$ cd tutorial-quickstart
 
 Tutorial jobs
 -------------
