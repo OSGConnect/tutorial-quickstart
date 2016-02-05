@@ -127,7 +127,7 @@ message like:
 To see the projects you belong to, you can use the command
 `osgconnect_show_projects`:
 
-	$ connect show_projects
+	$ connect show-projects
 	Based on username (dgc), here is a list of projects you might have
 	access to:
 	ConnectTrain
@@ -151,7 +151,7 @@ a member of, then your job submission will fail.
 
 Submit the job using `condor_submit`:
 
-	$ condor_submit tutorial01
+	$ condor_submit tutorial01.submit
 	Submitting job(s). 
 	1 job(s) submitted to cluster 823.
 
@@ -185,7 +185,7 @@ program repeatedly, letting you see how the output differs at fixed
 time intervals. Let's submit the job again, and watch `condor_q` output
 at two-second intervals: 
 
-	$ condor_submit tutorial01
+	$ condor_submit tutorial01.submit
 	Submitting job(s). 
 	1 job(s) submitted to cluster 824
 	$ watch -n2 condor_q netid 
@@ -256,7 +256,7 @@ Before submitting, we also need to make sure the log directory exists.
 
 You'll see something like the following upon submission:
 
-	$ condor_submit tutorial02
+	$ condor_submit tutorial02.submit
 	Submitting job(s)..........
 	10 job(s) submitted to cluster 837.
 
@@ -284,7 +284,7 @@ also dial down our sleep time from 15 seconds to 5.
 
 And let's submit:
 
-	$ condor_submit tutorial03
+	$ condor_submit tutorial03.submit
 	Submitting job(s)....................................................................................................
 	10 job(s) submitted to cluster 938. 
 
