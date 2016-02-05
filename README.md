@@ -128,7 +128,7 @@ To see the projects you belong to, you can use the command
 `osgconnect_show_projects`:
 
 	$ connect show-projects
-	Based on username (dgc), here is a list of projects you might have
+	Based on username, here is a list of projects you might have
 	access to:
 	ConnectTrain
 
