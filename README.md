@@ -86,43 +86,46 @@ of HTCondor before submitting into the grid.
 
 So far, so good! Let's create a simple (if verbose) HTCondor submit file. 
 
-	# The UNIVERSE defines an execution environment. You will almost always use VANILLA. 
-	Universe = vanilla 
-	
-	# EXECUTABLE is the program your job will run It's often useful 
-	# to create a shell script to "wrap" your actual work. 
-	Executable = short.sh 
-	
-	# ERROR and OUTPUT are the error and output channels from your job
-	# that HTCondor returns from the remote host.
-	Error = job.error
-	Output = job.output
-	
-	# The LOG file is where HTCondor places information about your 
-	# job's status, success, and resource consumption. 
-	Log = job.log
-	
-	# +ProjectName is the name of the project reported to the OSG accounting system
-	+ProjectName="ConnectTrain"
-	
-	# QUEUE is the "start button" - it launches any jobs that have been 
-	# specified thus far. 
-	Queue 1
+    # The UNIVERSE defines an execution environment. You will almost always use VANILLA.
+    Universe = vanilla
+    
+    # These are good base requirements for your jobs on OSG. It is specific on OS and
+    # OS version, core cound and memory, and wants to use the software modules. 
+    Requirements = OSGVO_OS_STRING == "RHEL 6" && Arch == "X86_64" &&  HAS_MODULES == True
+    request_cpus = 1
+    request_memory = 1 GB
+    
+    # EXECUTABLE is the program your job will run It's often useful
+    # to create a shell script to "wrap" your actual work.
+    Executable = short.sh
+    Arguments = 
+    
+    # ERROR and OUTPUT are the error and output channels from your job
+    # that HTCondor returns from the remote host.
+    Error = job.$(Cluster).$(Process).error
+    Output = job.$(Cluster).$(Process).output
+    
+    # The LOG file is where HTCondor places information about your
+    # job's status, success, and resource consumption.
+    Log = job.log
+    
+    # Send the job to Held state on failure. 
+    on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+    
+    # Periodically retry the jobs every 1 hour, up to a maximum of 5 retries.
+    periodic_release =  (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60*60)
+    
+    # QUEUE is the "start button" - it launches any jobs that have been
+    # specified thus far.
+    Queue 1
 
-### Choose the project name
 
-It is very important to set a project name using the `+ProjectName =
-"project"` parameter. A job without a ProjectName will fail with a
-message like:
+### More about projects
 
-	No ProjectName ClassAd defined!
-	Please record your OSG project ID in your submit file.
-	  Example:  +ProjectName = "OSG-CO1234567"
-	
-	Based on your username, here is a list of projects you might have 
-	access to:
-	ConnectTrain
-	OSG-Staff
+You can join projects after you login at <https://portal.osgconnect.net/>
+. Within minutes of joining and being approved for a project, you will
+have access via `condor_submit` as well. For more information on creating
+a project, please see [this page](http://support.opensciencegrid.org/support/solutions/articles/5000634360)
 
 To see the projects you belong to, you can use the command
 `connect show-projects`:
@@ -131,13 +134,6 @@ To see the projects you belong to, you can use the command
 	Based on username, here is a list of projects you might have
 	access to:
 	ConnectTrain
-
-### More about projects
-
-You can join projects after you login at <https://portal.osgconnect.net/>
-. Within minutes of joining and being approved for a project, you will
-have access via `condor_submit` as well. For more information on creating
-a project, please see [this page](http://support.opensciencegrid.org/support/solutions/articles/5000634360)
 
 You have two ways to set the project name for your jobs:
 
@@ -151,7 +147,7 @@ a member of, then your job submission will fail.
 
 Submit the job using `condor_submit`:
 
-	$ condor_submit tutorial01.submit
+	$ condor_submit osg-template-job.submit
 	Submitting job(s). 
 	1 job(s) submitted to cluster 823.
 
@@ -185,7 +181,7 @@ program repeatedly, letting you see how the output differs at fixed
 time intervals. Let's submit the job again, and watch `condor_q` output
 at two-second intervals: 
 
-	$ condor_submit tutorial01.submit
+	$ condor_submit osg-template-job.submit
 	Submitting job(s). 
 	1 job(s) submitted to cluster 824
 	$ watch -n2 condor_q netid 
