@@ -127,8 +127,7 @@ You can join projects after you login at <https://portal.osgconnect.net/>
 have access via `condor_submit` as well. For more information on creating
 a project, please see [this page](http://support.opensciencegrid.org/support/solutions/articles/5000634360)
 
-To see the projects you belong to, you can use the command
-`connect show-projects`:
+To see the projects you belong to, you can use the command `connect show-projects`:
 
 	$ connect show-projects
 	Based on username, here is a list of projects you might have
