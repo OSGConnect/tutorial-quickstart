@@ -136,7 +136,7 @@ To see the projects you belong to, you can use the command `connect show-project
 
 You have two ways to set the project name for your jobs:
 
-1. Add the `+ProjectName="MyProject"` line to the HTCondor submit file. Remember to quote the project name!
+1. Add the `+ProjectName = "MyProject"` line to the HTCondor submit file. Remember to quote the project name!
 2. Create in your home directory a file with your default project name: `$HOME/.osg_default_project`
 
 If you do not set a project name, or you use a project that you're not
@@ -242,7 +242,7 @@ verbose) submit file looks like:
 	Error = log/job.error.$(Cluster)-$(Process) 
 	Output = log/job.output.$(Cluster)-$(Process) 
 	Log = log/job.log.$(Cluster) 
-	+ProjectName="ConnectTrain"
+	+ProjectName = "ConnectTrain"
 	Queue 10 
 
 Before submitting, we also need to make sure the log directory exists.
@@ -274,7 +274,7 @@ also dial down our sleep time from 15 seconds to 5.
 	Error = log/job.err.$(Cluster)-$(Process) 
 	Output = log/job.out.$(Cluster)-$(Process) 
 	Log = log/job.log.$(Cluster) 
-	+ProjectName="ConnectTrain"
+	+ProjectName = "ConnectTrain"
 	Queue 10
 
 And let's submit:
