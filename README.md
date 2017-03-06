@@ -61,7 +61,7 @@ let's create a test script to execute as your job:
 	printf "Job is running in directory: "; /bin/pwd
 	echo
 	echo "Working hard..."
-	sleep ${1-15}
+	sleep 20
 	echo "Science complete!"
 
 Now, make the script executable.
