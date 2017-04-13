@@ -6,6 +6,7 @@ Universe = vanilla
 Requirements = OSGVO_OS_STRING == "RHEL 6" && Arch == "X86_64" &&  HAS_MODULES == True
 request_cpus = 1
 request_memory = 1 GB
+request_disk = 10 GB
 
 # EXECUTABLE is the program your job will run It's often useful
 # to create a shell script to "wrap" your actual work.
