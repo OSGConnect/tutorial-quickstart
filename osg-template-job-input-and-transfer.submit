@@ -9,7 +9,7 @@ request_memory = 1 GB
 
 # EXECUTABLE is the program your job will run It's often useful
 # to create a shell script to "wrap" your actual work.
-Executable = short_with_input.sh
+Executable = short_with_input_output_transfer.sh
 
 # ERROR and OUTPUT are the error and output channels from your job
 # that HTCondor returns from the remote host. $(Cluster) is the 
