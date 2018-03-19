@@ -1,22 +1,20 @@
-# The UNIVERSE defines an execution environment. You will almost always use VANILLA. 
-Universe = vanilla 
+VERSE defines an execution environment. You will almost always use VANILLA.
+Universe = vanilla
 
-# EXECUTABLE is the program your job will run It's often useful 
-# to create a shell script to "wrap" your actual work. 
-Executable = short.sh 
+# EXECUTABLE is the program your job will run It's often useful
+# to create a shell script to "wrap" your actual work.
+Executable = short.sh
 
 # ERROR and OUTPUT are the error and output channels from your job
 # that HTCondor returns from the remote host.
 Error = job.error
 Output = job.output
 
-# The LOG file is where HTCondor places information about your 
-# job's status, success, and resource consumption. 
+# The LOG file is where HTCondor places information about your
+# job's status, success, and resource consumption.
 Log = job.log
 
-# +ProjectName is the name of the project reported to the OSG accounting system
-# +ProjectName="ConnectTrain"
+# QUEUE is the "start button" - it launches any jobs that have been
+# specified thus far.
+queue 1
 
-# QUEUE is the "start button" - it launches any jobs that have been 
-# specified thus far. 
-Queue 1
