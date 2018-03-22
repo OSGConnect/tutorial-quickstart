@@ -1,4 +1,4 @@
-VERSE defines an execution environment. You will almost always use VANILLA.
+# The UNIVERSE defines an execution environment. You will almost always use VANILLA.
 Universe = vanilla
 
 # EXECUTABLE is the program your job will run It's often useful
