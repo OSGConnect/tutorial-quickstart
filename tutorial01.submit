@@ -1,20 +1,28 @@
-# The UNIVERSE defines an execution environment. You will almost always use VANILLA.
-Universe = vanilla
+# The 'vanilla' universe is HTCondor's default way of executing
+#  jobs, by running an executable (with arguments) for us. Nearly
+#  all OSG jobs run in the vanilla universe.
+universe = vanilla
 
-# EXECUTABLE is the program your job will run It's often useful
-# to create a shell script to "wrap" your actual work.
-Executable = short.sh
+# Our executable is the main program or script that we've created
+# to do the 'work' of a single job. If we have any arguments to pass,
+# those are listed on a separate line.
+executable = short.sh
+arguments = 
 
-# ERROR and OUTPUT are the error and output channels from your job
-# that HTCondor returns from the remote host.
-Error = job.error
-Output = job.output
+# We need to name the files that HTCondor should create to save the
+#  terminal output (stdout) and error (stderr) created by our job.
+#  Similarly, we need to name the log file where HTCondor will save
+#  information about job execution steps.
+error = short.error
+output = short.output
+log = short.log
 
-# The LOG file is where HTCondor places information about your
-# job's status, success, and resource consumption.
-Log = job.log
+# We need to request the resources that this job will need:
+request_cpus = 1
+request_memory = 1 MB
+request_disk = 1 MB
 
-# QUEUE is the "start button" - it launches any jobs that have been
-# specified thus far.
+# The last line of a submit file indicates how many jobs of the above
+#  description should be queued. We'll start with one job.
 queue 1
 
