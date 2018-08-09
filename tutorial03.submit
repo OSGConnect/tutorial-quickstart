@@ -1,8 +1,0 @@
-Universe = vanilla 
-Executable = short.sh 
-Arguments = 60 # to sleep 60 seconds 
-Error = log/job.err.$(Cluster)-$(Process) 
-Output = log/job.out.$(Cluster)-$(Process) 
-Log = log/job.log.$(Cluster) 
-#+ProjectName="ConnectTrain"
-Queue 100
