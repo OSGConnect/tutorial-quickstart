@@ -1,45 +1,32 @@
-# The UNIVERSE defines an execution environment. You will almost always use VANILLA.
-Universe = vanilla
-
-# These are good base requirements for your jobs on OSG. It is specific on OS and
-# OS version, core count and memory, and wants to use the software modules. 
-Requirements = OSGVO_OS_STRING == "RHEL 6" && Arch == "X86_64" && HAS_MODULES == True
-request_cpus = 1
-request_memory = 1 GB
-
-# EXECUTABLE is the program your job will run It's often useful
-# to create a shell script to "wrap" your actual work.
-Executable = short_with_input_output_transfer.sh
-
-# ERROR and OUTPUT are the error and output channels from your job
-# that HTCondor returns from the remote host. $(Cluster) is the 
-# ID HTCondor assigns to the job and $(Process) is the ID HTCondor
-# assigns within a set of jobs. 
-Error = job.$(Cluster).$(Process).error
-Output = job.$(Cluster).$(Process).output
-
-# The LOG file is where HTCondor places information about your
-# job's status, success, and resource consumption.
-Log = job.log
-
-# Send the job to Held state on failure. 
-on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)  
-
-# Periodically retry the jobs every 60 seconds, up to a maximum of 5 retries.
-periodic_release =  (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
-
-# TRANSFER_INPUT_FILES defines which files should be transferred to the job. 
-# Please note that this should only be used for relatively small files
+# We need the job to run our executable script, with the
+#  input.txt filename as an argument, and to transfer the
+#  relevant input and output files:
+executable = short_with_input_output_transfer.sh
+arguments = input.txt
 transfer_input_files = input.txt
-
-# TRANSFER_OUTPUT_FILES defines which files should be transferred from the job back to 
-# the submit host. 
-# Please note that this should only be used for relatively small files
 transfer_output_files = output.txt
 
-# ARGUMENTS is a way to pass command line input to the EXECUTABLE
-arguments = input.txt
+# This time, let's specify unique filenames for each job by using
+#  the job 'cluster' and 'process' values.
+error = job.$(Cluster).$(Process).error
+output = job.$(Cluster).$(Process).output
+log = job.$(Cluster).$(Process).log
 
-# QUEUE is the "start button" - it launches any jobs that have been
-# specified thus far.
+# The below are good base requirements for first testing jobs on OSG, 
+#  if you don't have a good idea of memory and disk usage. Though we 
+#  don't actually need them for our shell script, we'll also require
+#  servers that have the OSG software modules:
+request_cpus = 1
+request_memory = 1 GB
+request_disk = 1 GB
+Requirements = HAS_MODULES == True
+
+# A useful HTCondor trick when running many jobs across the 
+#  heterogeneous OSG servers is to have any failed jobs held 
+#  and released to re-run after a short time (up to five times)
+#  so that they might succeed on another execute server:
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)  
+periodic_release =  (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
+
+# Queue the appropriate number of jobs with the above specifications.
 queue 1
