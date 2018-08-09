@@ -1,8 +1,6 @@
 # Our executable is the main program or script that we've created
-# to do the 'work' of a single job. If we have any arguments to pass,
-# those are listed on a separate line.
+# to do the 'work' of a single job.
 executable = short.sh
-arguments = 
 
 # We need to name the files that HTCondor should create to save the
 #  terminal output (stdout) and error (stderr) created by our job.
