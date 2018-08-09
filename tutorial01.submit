@@ -1,8 +1,3 @@
-# The 'vanilla' universe is HTCondor's default way of executing
-#  jobs, by running an executable (with arguments) for us. Nearly
-#  all OSG jobs run in the vanilla universe.
-universe = vanilla
-
 # Our executable is the main program or script that we've created
 # to do the 'work' of a single job. If we have any arguments to pass,
 # those are listed on a separate line.
