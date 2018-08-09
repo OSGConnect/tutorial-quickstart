@@ -28,5 +28,5 @@ Requirements = HAS_MODULES == True
 on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)  
 periodic_release =  (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
 
-# Let's queue two jobs this time:
-queue 2
+# Let's queue one job with the above:
+queue 1
