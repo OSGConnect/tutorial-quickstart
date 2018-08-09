@@ -26,7 +26,7 @@ Requirements = HAS_MODULES == True
 #  and released to re-run after a short time (up to five times)
 #  so that they might succeed on another execute server:
 on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)  
-periodic_release =  (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
+periodic_release = (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
 
 # Let's queue one job with the above:
 queue 1
