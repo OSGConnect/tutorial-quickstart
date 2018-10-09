@@ -1,32 +1,20 @@
 # We need the job to run our executable script, with the
 #  input.txt filename as an argument, and to transfer the
 #  relevant input and output files:
-executable = short_with_input_output_transfer.sh
+executable = short_transfer.sh
 arguments = input.txt
 transfer_input_files = input.txt
 transfer_output_files = output.txt
 
-# This time, let's specify unique filenames for each job by using
-#  the job 'cluster' and 'process' values.
-error = job.$(Cluster).$(Process).error
-output = job.$(Cluster).$(Process).output
-log = job.$(Cluster).$(Process).log
+error = job.$(Cluster).error
+output = job.$(Cluster).output
+log = job.$(Cluster).log
 
 # The below are good base requirements for first testing jobs on OSG, 
-#  if you don't have a good idea of memory and disk usage. Though we 
-#  don't actually need them for our shell script, we'll also require
-#  servers that have the OSG software modules:
+#  if you don't have a good idea of memory and disk usage. 
 request_cpus = 1
 request_memory = 1 GB
 request_disk = 1 GB
-Requirements = HAS_MODULES == True
-
-# A useful HTCondor trick when running many jobs across the 
-#  heterogeneous OSG servers is to have any failed jobs held 
-#  and released to re-run after a short time (up to five times)
-#  so that they might succeed on another execute server:
-on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)  
-periodic_release = (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
 
 # Let's queue one job with the above:
 queue 1
