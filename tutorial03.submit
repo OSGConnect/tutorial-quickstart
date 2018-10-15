@@ -1,7 +1,7 @@
 # We need the job to run our executable script, with the
 #  input.txt filename as an argument, and to transfer the
 #  relevant input and output files:
-executable = short_with_input_output_transfer.sh
+executable = short_transfer.sh
 arguments = input.txt
 transfer_input_files = input.txt
 transfer_output_files = output.txt
