@@ -6,15 +6,15 @@ arguments = input.txt
 transfer_input_files = input.txt
 transfer_output_files = output.txt
 
-error = job.$(Cluster).error
-output = job.$(Cluster).output
-log = job.$(Cluster).log
+error = job.error
+output = job.output
+log = job.log
 
 # The below are good base requirements for first testing jobs on OSG, 
-#  if you don't have a good idea of memory and disk usage. 
+#  if you don't have a good idea of memory and disk usage.
 request_cpus = 1
 request_memory = 1 GB
 request_disk = 1 GB
 
-# Let's queue one job with the above:
+# Queue one job with the above specifications.
 queue 1

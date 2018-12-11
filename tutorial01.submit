@@ -6,11 +6,9 @@ executable = short.sh
 #  terminal output (stdout) and error (stderr) created by our job.
 #  Similarly, we need to name the log file where HTCondor will save
 #  information about job execution steps.
-#  We'll specify unique filenames for each job by using
-#  the job's 'cluster' value.
-error = short.$(Cluster).error
-output = short.$(Cluster).output
-log = short.$(Cluster).log
+error = short.error
+output = short.output
+log = short.log
 
 # We need to request the resources that this job will need:
 request_cpus = 1
