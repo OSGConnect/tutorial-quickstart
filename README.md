@@ -1,5 +1,7 @@
 [title]: - "OSG Connect Quickstart"
 
+[TOC]
+
 ## Login to OSG Connect
 
 If you have not already registered for OSG Connect, go to [the
