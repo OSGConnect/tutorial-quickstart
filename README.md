@@ -5,23 +5,14 @@
 ## Login to OSG Connect
 
 If you have not already registered for OSG Connect, go to [the
-registration site](http://osgconnect.net/signup) and follow the instructions there.
-Once registered, you are authorized to use `login.osgconnect.net` (the
-HTCondor submit host) and `stash.osgconnect.net` (the data host), in each
-case authenticating with your OSG Connect ID and password.  For the rest of the
-material on this page, you will need to ssh to `login.osgconnect.net`.
-
-## Set up the tutorial
-
-You may perform the examples in the tutorial by typing them
-in from the text below, or by using tutorial files already on
-`login.osgconnect.net`.  It's your choice; the tutorial is the same
-either way.
+registration site](https://osgconnect.net/signup) and follow the instructions there.
+Once registered, you will be assigned a login node which you can
+use for the rest of this tutorial.
 
 
 ### Pretyped setup
 To save some typing, you can install the tutorial into your home
-directory from `login.osgconnect.net`. This is highly recommended to
+directory on the login node. This is highly recommended to
 ensure that you don't encounter transcription errors during the
 tutorials. 
 
@@ -79,7 +70,7 @@ of HTCondor before submitting into the grid.
 
 	$ ./short.sh
 	Start time: Wed Aug 21 09:21:35 CDT 2013
-	Job is running on node: login01.osgconnect.net
+	Job is running on node: loginNN.osgconnect.net
 	Job running as user: uid=54161(netid) gid=1000(users) groups=1000(users),0(root),1001(osg-connect),1002(osg-staff),1003(osg-connect-test),9948(staff),19012(osgconnect)
 	Job is running in directory: /home/netid/quickstart
 	Working hard...
@@ -112,7 +103,7 @@ So far, so good! Let's create a simple (if verbose) HTCondor submit file. This c
 
 ### More about projects
 
-You can join projects after you login at <https://portal.osgconnect.net/>
+You can join projects after you login at <https://osgconnect.net/>
 . Within minutes of joining and being approved for a project, you will
 have access via `condor_submit` as well. For more information on creating
 a project, please see [this page](http://support.opensciencegrid.org/support/solutions/articles/5000634360)
@@ -139,7 +130,7 @@ The `condor_q` command tells the status of currently running jobs.
 Generally you will want to limit it to your own jobs: 
 
 	$ condor_q netid
-	-- Schedd: login03.osgconnect.net : <192.170.227.22:9618?... @ 12/10/18 14:19:08
+	-- Schedd: loginNN.osgconnect.net : <192.170.227.22:9618?... @ 12/10/18 14:19:08
 	OWNER	   BATCH_NAME     SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
 	netid	 ID: 1441271  12/10 14:18	 _	1      _      1 1441271.0
 
@@ -150,7 +141,7 @@ Generally you will want to limit it to your own jobs:
 You can also get status on a specific job cluster: 
 
 	$ condor_q 1441271
-	-- Schedd: login03.osgconnect.net : <192.170.227.22:9618?... @ 12/10/18 14:19:08
+	-- Schedd: loginNN.osgconnect.net : <192.170.227.22:9618?... @ 12/10/18 14:19:08
 	OWNER	   BATCH_NAME     SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
 	netid	 ID: 1441271  12/10 14:18	 _	1      _      1 1441271.0
 
@@ -256,7 +247,7 @@ Once again, before submitting our job we should test it locally to ensure it run
 
 	$ ./short_transfer.sh input.txt
 	Start time: Tue Dec 11 10:19:12 CST 2018
-	Job is running on node: login03.osgconnect.net
+	Job is running on node: loginNN.osgconnect.net
 	Job running as user: uid=100279(netid) gid=1000(users) groups=1000(users),5532(connect),5782(osg),7021(osg.ConnectTrain)
 	Job is running in directory: /home/netid/tutorial-quickstart
 	The command line argument is: Contents of input.txt is "Hello World"Working hard...total 28
@@ -381,7 +372,7 @@ interesting distribution output.
 
 	$ condor_history -format '%s\n' LastRemoteHost 942 | cut -d@ -f2 | distribution --height=100
 	Val                    |Ct (Pct)     Histogram
-	[netid@login01 log]$ condor_history -format '%s\n' LastRemoteHost 959 | cut -d@ -f2 | cut -d. -f2,3 | distribution --height=100
+	[netid@loginNN log]$ condor_history -format '%s\n' LastRemoteHost 959 | cut -d@ -f2 | cut -d. -f2,3 | distribution --height=100
 	Val          |Ct (Pct)     Histogram
 	mwt2.org     |456 (46.77%) +++++++++++++++++++++++++++++++++++++++++++++++++++++
 	uchicago.edu |422 (43.28%) +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -400,13 +391,6 @@ endpoints.
 There is also `condor_plot` a command that plots similar information in a
 HTML page. You can have bar plots, pie charts and more.
 
-
-Workload Analysis 
------------------
-
-OSG Connect also has a page that provides job analytics on running and recently completed jobs. You can visit it [here](http://osgconnect.net/metrics/user).
-
-
 Removing jobs
 --------------
 
@@ -424,4 +408,11 @@ all jobs belonging to the user. The `condor_rm` documenation has more
 details on using `condor_rm` including ways to remove jobs based on other
 constraints.
 
-[You can register at https://osgconnect.net/signup](https://osgconnect.net/signup)
+What's next?
+------------
+
+We recommend you read about how to steer your jobs with HTCondor job
+requirements - this will allow you to select good resources for your
+workload. Please see [this page](https://support.opensciencegrid.org/support/solutions/articles/5000633467-steer-your-jobs-with-htcondor-job-requirements)
+
+
