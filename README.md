@@ -88,6 +88,8 @@ So far, so good! Let's create a simple (if verbose) HTCondor submit file. This c
 	#  terminal output (stdout) and error (stderr) created by our job.
 	#  Similarly, we need to name the log file where HTCondor will save
 	#  information about job execution steps.
+	
+	universe =  vanilla
 	error = short.error
 	output = short.output
 	log = short.log
@@ -270,7 +272,6 @@ Now, let's edit our submit file to properly handle these new arguments and outpu
 	executable = short_transfer.sh
 	arguments = input.txt
 	transfer_input_files = input.txt
-	transfer_output_files = output.txt
 
 	error = job.error
 	output = job.output
@@ -286,9 +287,14 @@ Now, let's edit our submit file to properly handle these new arguments and outpu
 	queue 1
 
 
-Notice the added `arguments = input.txt` information. The `arguements` option specifies what arguments should be passed to the executable. 
+Notice the added `arguments = input.txt` information. The `arguments` option specifies what arguments should be passed to the executable. 
 
-The `transfer_input_files` and `transfer_output_files` options need to be included as well.  When jobs are deployed on the Open Science Grid, they are sent only with files that are specified. Additionally, only the specified output files are returned with the job. **Any output not transferred back, with the exception of our `error`, `output`, and `log` files, are discarded at the end of the job.**
+Due to the distributed configuration of the OSG this job will need to bring along a copy of `input.txt` from the 
+login node, where the job is submitted, to the execute node where the job will run by using `transfer_input_files`. 
+After the job completes, HTCondor will, by default, transfer any new (i.e. output) or modified files in the job's top-level 
+directory back to your `/home` directory location from which the condor_submit command was performed. This 
+behavior only applies to files in the top-level directory of where your job executes, meaning HTCondor will 
+ignore any files created in subdirectories of the job's top-level directory. 
 
 Submit the new submit file using `condor_submit`. Be sure to check your output files once the job completes.
 
@@ -315,7 +321,6 @@ to put the files in a directory called log. Here's what the third submit file lo
 	executable = short_transfer.sh
 	arguments = input.txt
 	transfer_input_files = input.txt
-	transfer_output_files = output.txt
 
 	error = log/job.$(Cluster).$(Process)error
 	output = log/job.$(Cluster).$(Process).output
