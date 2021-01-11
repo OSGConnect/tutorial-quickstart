@@ -82,6 +82,7 @@ So far, so good! Let's create a simple (if verbose) HTCondor submit file. This c
 
 	# Our executable is the main program or script that we've created
 	# to do the 'work' of a single job.
+	
 	executable = short.sh
 
 	# We need to name the files that HTCondor should create to save the
@@ -89,7 +90,6 @@ So far, so good! Let's create a simple (if verbose) HTCondor submit file. This c
 	#  Similarly, we need to name the log file where HTCondor will save
 	#  information about job execution steps.
 	
-	universe =  vanilla
 	error = short.error
 	output = short.output
 	log = short.log
@@ -318,6 +318,7 @@ to put the files in a directory called log. Here's what the third submit file lo
 	# We need the job to run our executable script, arguments and files.
 	#  Also, we'll specify unique filenames for each job by using
 	#  the job's 'cluster' value.
+	
 	executable = short_transfer.sh
 	arguments = input.txt
 	transfer_input_files = input.txt
