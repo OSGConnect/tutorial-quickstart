@@ -289,8 +289,8 @@ Now, let's edit our submit file to properly handle these new arguments and outpu
 
 Notice the added `arguments = input.txt` information. The `arguments` option specifies what arguments should be passed to the executable. 
 
-Due to the distributed configuration of the OSG this job will need to bring along a copy of `input.txt` from the 
-login node, where the job is submitted, to the execute node where the job will run by using `transfer_input_files`. 
+Due to the distributed configuration of the OSG, `transfer_input_files` is used to bring along a copy of `input.txt` from the 
+login node, where the job is submitted, to the execute node where the job will run. 
 After the job completes, HTCondor will, by default, transfer any new (i.e. output) or modified files in the job's top-level 
 directory back to your `/home` directory location from which the `condor_submit` command was performed. This 
 behavior only applies to files in the top-level directory of where your job executes, meaning HTCondor will 
