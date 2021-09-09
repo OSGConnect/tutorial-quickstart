@@ -415,4 +415,6 @@ We recommend you read about how to steer your jobs with HTCondor job
 requirements - this will allow you to select good resources for your
 workload. Please see [this page](https://support.opensciencegrid.org/support/solutions/articles/5000633467-steer-your-jobs-with-htcondor-job-requirements)
 
+**Watch this video from the 2021 OSG Virtual School** for an introduction to HTC Job Execution with HTCondor:
 
+[<img src="https://raw.githubusercontent.com/OSGConnect/tutorial-quickstart/master/Images/HTCondor_Intro_Video_Thumbnail.png" width="500">](https://www.youtube.com/embed/9896xAhT4dY)
