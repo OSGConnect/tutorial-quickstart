@@ -1,4 +1,4 @@
-[title]: - "OSG Connect Quickstart"
+[title]: - "Quickstart - Submit Example HTCondor Jobs"
 
 [TOC]
 
