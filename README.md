@@ -40,7 +40,7 @@ directory for the tutorial work:
 Tutorial jobs
 -------------
 
-### Job 1: A simple, nonparallel job
+## Job 1: A simple, nonparallel job
 
 Inside the tutorial directory that you created or installed previously,
 let's create a test script to execute as your job. For pretyped setup, this is
