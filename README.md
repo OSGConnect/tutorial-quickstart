@@ -347,49 +347,19 @@ Look at the output files in the log directory and notice how each job received i
 
 ### Where did jobs run? 
 
-When we start submitting a lot of simultaneous jobs into the queue, it might
-be worth looking at where they run. To get that information, we'll use a
-couple of `condor_history` commands. First, run `condor_history -long jobid`
-for your first job. Again the output is quite long:
+It might be interesting to see where our jobs actually ran. To get that information for a single job, we can use the command `condor_history`. First, select a job you want to investigate and then run `condor_history -long jobid`. In this example, we will investigate the job ID 1444786.9. Again the output is quite long:
 
-	$ condor_history -long 1444786
+	$ condor_history -limit 1 -long 1444786.9
 	BlockWriteKbytes = 0
 	BlockReads = 0
 	DiskUsage_RAW = 36
 	... 
-
-Looking through here for a hostname, we can see that the parameter
-that we want to know is `LastRemoteHost`. That's what job slot our job
-ran on. With that detail, we can construct a shell command to get
-the execution node for each of our 100 jobs, and we can plot the
-spread. LastRemoteHost normally combines a slot name and a host name,
-separated by an @ symbol, so we'll use the UNIX cut command to slice off
-the slot name and look only at hostnames. We'll cut again on the period
-in the hostname to grab the domain where the job ran.
-
-For illustration, the author has submitted a thousand jobs for a more
-interesting distribution output.
-
-	$ condor_history -format '%s\n' LastRemoteHost 942 | cut -d@ -f2 | distribution --height=100
-	Val                    |Ct (Pct)     Histogram
-	[netid@loginNN log]$ condor_history -format '%s\n' LastRemoteHost 959 | cut -d@ -f2 | cut -d. -f2,3 | distribution --height=100
-	Val          |Ct (Pct)     Histogram
-	mwt2.org     |456 (46.77%) +++++++++++++++++++++++++++++++++++++++++++++++++++++
-	uchicago.edu |422 (43.28%) +++++++++++++++++++++++++++++++++++++++++++++++++
-	local        |28 (2.87%)   ++++
-	t2.ucsd      |23 (2.36%)   +++
-	phys.uconn   |12 (1.23%)   ++
-	tusker.hcc   |10 (1.03%)   ++
+	MATCH_EXP_JOBGLIDEIN_ResourceName = "Georgia_Tech_PACE_CE_2"
 	...
+	
+Looking through here for a hostname, we can see that the parameter `MATCH_EXP_JOBGLIDEIN_ResourceName`. The output of this parameter is the slot our job ran on. In this example, our job ran on a slot at the Georgia Institute of Technology. 
 
-The distribution program reduces a list of hostnames to a set of
-hostnames with no duplication (much like `sort | uniq -c`), but
-additionally plots a distribution histogram on your terminal
-window. This is nice for seeing how Condor selected your execution
-endpoints.
-
-There is also `condor_plot` a command that plots similar information in a
-HTML page. You can have bar plots, pie charts and more.
+To visualize where multiple jobs have run, visit our [Finding OSG Locations](https://support.opensciencegrid.org/support/solutions/articles/12000061978-finding-osg-locations) tutorial. 
 
 Removing jobs
 --------------
