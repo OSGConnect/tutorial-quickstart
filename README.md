@@ -349,7 +349,7 @@ Look at the output files in the log directory and notice how each job received i
 
 It might be interesting to see where our jobs actually ran. To get that information for a single job, we can use the command `condor_history`. First, select a job you want to investigate and then run `condor_history -long jobid`. In this example, we will investigate the job ID 1444786.9. Again the output is quite long:
 
-	$ condor_history -long 1444786.9
+	$ condor_history -limit 1 -long 1444786.9
 	BlockWriteKbytes = 0
 	BlockReads = 0
 	DiskUsage_RAW = 36
