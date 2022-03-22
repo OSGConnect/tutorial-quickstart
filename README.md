@@ -66,7 +66,7 @@ Now, make the script executable.
 ### Run the job locally
 
 When setting up a new job submission, it's important to test your job outside
-of HTCondor before submitting into the grid. 
+of HTCondor before submitting into the Open Science Pool. 
 
 	$ ./short.sh
 	Start time: Wed Aug 21 09:21:35 CDT 2013
@@ -288,7 +288,7 @@ Now, let's edit our submit file to properly handle these new arguments and outpu
 
 Notice the added `arguments = input.txt` information. The `arguements` option specifies what arguments should be passed to the executable. 
 
-The `transfer_input_files` and `transfer_output_files` options need to be included as well.  When jobs are deployed on the Open Science Grid, they are sent only with files that are specified. Additionally, only the specified output files are returned with the job. **Any output not transferred back, with the exception of our `error`, `output`, and `log` files, are discarded at the end of the job.**
+The `transfer_input_files` and `transfer_output_files` options need to be included as well.  When jobs are executed on the Open Science Pool via HTCondor, they are sent only with files that are specified. Additionally, only the specified output files are returned with the job. **Any output not transferred back, with the exception of our `error`, `output`, and `log` files, are discarded at the end of the job.**
 
 Submit the new submit file using `condor_submit`. Be sure to check your output files once the job completes.
 
