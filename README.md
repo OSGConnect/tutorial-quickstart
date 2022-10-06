@@ -1,6 +1,9 @@
-[title]: - "Quickstart - Submit Example HTCondor Jobs"
+---
+ospool:
+    path: htc_workloads/submitting_workloads/tutorial-quickstart/README.md
+---
 
-[TOC]
+# Quickstart - Submit Example HTCondor Jobs
 
 ## Login to OSG Connect
 
