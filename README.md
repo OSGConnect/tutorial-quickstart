@@ -5,28 +5,20 @@ ospool:
 
 # Quickstart - Submit Example HTCondor Jobs
 
-## Login to OSG Connect
+## Login to OSG Access Point
 
-If you have not already registered for OSG Connect, go to [the
-registration site](https://osgconnect.net/signup) and follow the instructions there.
-Once registered, you will be assigned a login node which you can
-use for the rest of this tutorial.
+To begin, login to your OSG Access Point. 
 
 
 ### Pretyped setup
-To save some typing, you can install the tutorial into your home
-directory on the login node. This is highly recommended to
+To save some typing, you can download the tutorial materials into your home
+directory on the access point. This is highly recommended to
 ensure that you don't encounter transcription errors during the
 tutorials. 
 
-	$ tutorial 
-	usage: tutorial name-of-tutorial 
-	       tutorial info name-of-tutorial
-	
-	Available tutorials: 
-	quickstart ..... How to run your first OSG job
+	$ git clone https://github.com/OSGConnect/tutorial-quickstart
 
-Now, run the quickstart tutorial:
+Now, let's start the quickstart tutorial:
 
 	$ tutorial quickstart 
 	$ cd tutorial-quickstart 
