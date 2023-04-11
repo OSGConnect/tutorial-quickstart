@@ -20,7 +20,6 @@ tutorials.
 
 Now, let's start the quickstart tutorial:
 
-	$ tutorial quickstart 
 	$ cd tutorial-quickstart 
 
 
