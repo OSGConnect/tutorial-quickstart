@@ -150,20 +150,20 @@ appear in the `RUN` column. As it finishes up, it will then show in the `DONE` c
 Once the job completes completely, it will not appear in `condor_q`. 
 
 Let's wait for your job to finish – that is, for `condor_q` not to show
-the job in its output. A useful tool for this is watch – it runs a
+the job in its output. A useful tool for this is condor_watch_q – it runs a
 program repeatedly, letting you see how the output differs at fixed
-time intervals. Let's submit the job again, and watch `condor_q` output
+time intervals. Let's submit the job again, and watch `condor_watch_q` output
 at two-second intervals: 
 
 	$ condor_submit tutorial01.submit
 	Submitting job(s). 
 	1 job(s) submitted to cluster 1441272
-	$ watch -n2 condor_q netid 
+	$ condor_watch_q netid 
 	... 
 
 When your job has completed, it will disappear from the list. 
 
-*Note*: To close watch, hold down Ctrl and press C. 
+*Note*: To close condor_watch_q, hold down Ctrl and press C. 
 
 ### Job history
 
