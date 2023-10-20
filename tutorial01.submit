@@ -11,7 +11,7 @@ error = short.error
 output = short.output
 
 # This is the default category for jobs
-+JobDurationCategory = “Medium”
++JobDurationCategory = "Medium"
 
 # The below are good base requirements for first testing jobs on OSG, 
 #  if you don't have a good idea of memory and disk usage.

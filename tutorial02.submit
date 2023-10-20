@@ -11,7 +11,7 @@ log = job.log
 error = job.error
 output = job.output
 
-+JobDurationCategory = “Medium”
++JobDurationCategory = "Medium"
 
 request_cpus = 1
 request_memory = 1 GB

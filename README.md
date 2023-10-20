@@ -62,10 +62,10 @@ When setting up a new job submission, it's important to test your job outside
 of HTCondor before submitting into the Open Science Pool. 
 
 <pre class="term"><code>$ ./short.sh
-Start time: Wed Aug 21 09:21:35 CDT 2013
-Job is running on node: loginNN.osgconnect.net
-Job running as user: uid=54161(alice) gid=1000(users) groups=1000(users),0(root),1001(osg-connect),1002(osg-staff),1003(osg-connect-test),9948(staff),19012(osgconnect)
-Job is running in directory: /home/alice/quickstart
+Start time: Wed Aug 08 09:21:35 CDT 2023
+Job is running on node: ap50.ux.osg-htc.org
+Job running as user: uid=54161(alice), gid=5782(osg) groups=5782(osg),5513(osg.login-nodes),7158(osg.OSG-Staff)
+Job is running in directory: /home/alice/tutorial-quickstart
 Working hard...
 Science complete!
 </code></pre>
@@ -87,7 +87,7 @@ error = short.error
 output = short.output
 
 # This is the default category for jobs
-+JobDurationCategory = “Medium”
++JobDurationCategory = "Medium"
 
 # The below are good base requirements for first testing jobs on OSG, 
 #  if you don't have a good idea of memory and disk usage.
@@ -114,21 +114,21 @@ Submitting job(s).
 The `condor_q` command tells the status of currently running jobs.
 
 <pre class="term"><code> $ condor_q
--- Schedd: loginNN.osgconnect.net : <192.170.227.22:9618?... @ 12/10/18 14:19:08
+-- Schedd: ap50.ux.osg-htc.org : <192.170.227.22:9618?... @ 08/10/23 14:19:08
 OWNER	   BATCH_NAME     SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
-alice	 ID: 1441271  12/10 14:18	 _	1      _      1 1441271.0
+alice	 ID: 1441271  08/10 14:18	 _	1      _      1 1441271.0
 
 Total for query: 1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended
 Total for alice: 1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended
 Total for all users: 3001 jobs; 0 completed, 0 removed, 2189 idle, 754 running, 58 held, 0 suspended
 </code></pre>
 
-You can also get status on a specific job cluster: 
+You can also get the status of a specific job cluster: 
 
 <pre class="term"><code>$ condor_q 1441271
--- Schedd: loginNN.osgconnect.net : <192.170.227.22:9618?... @ 12/10/18 14:19:08
+-- Schedd: ap50.ux.osg-htc.org : <192.170.227.22:9618?... @ 08/10/23 14:19:08
 OWNER	   BATCH_NAME     SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
-alice	 ID: 1441271  12/10 14:18	 _	1      _      1 1441271.0
+alice	 ID: 1441271  08/10 14:18	 _	1      _      1 1441271.0
 
 Total for query: 1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended
 Total for alice: 1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended
@@ -155,9 +155,6 @@ $ condor_watch_q
 
 *Note*: To close condor_watch_q, hold down `Ctrl` and press C. 
 
-
-When your job has completed, it will disappear from the output of `condor_q`
-
 ### View job history
 
 Once your job has finished, you can get information about its execution
@@ -167,7 +164,7 @@ returns, as shown below:
 
 <pre class="term"><code>$ condor_history alice -limit 1
  ID      OWNER            SUBMITTED     RUN_TIME ST   COMPLETED CMD           
- 1441272.0   alice     12/10 14:18   0+00:00:29 C  12/10 14:19 /home/alice/tutorial-quickstart/short.sh 
+ 1441272.0   alice     08/10 14:18   0+00:00:29 C  08/10 14:19 /home/alice/tutorial-quickstart/short.sh 
 </code></pre>
 
 *Note*: You can see much more information about your job's final status
@@ -186,7 +183,7 @@ submit file. If everything was successful, it should have returned:
 Read the output file. It should be something like this: 
 
 <pre class="term"><code>$ cat short.output
-Start time: Mon Dec 10 20:18:56 UTC 2018
+Start time: Mon Aug 10 20:18:56 UTC 2023
 Job is running on node: osg-84086-0-cmswn2030.fnal.gov
 Job running as user: uid=12740(osg) gid=9652(osg) groups=9652(osg)
 Job is running in directory: /srv
@@ -209,7 +206,8 @@ losing our original script, we make a copy of the file under the name `short_tra
 
 <pre class="term"><code>$ cp short.sh short_transfer.sh</code></pre>
 
-Now, edit the file to include the added lines below:
+Now, edit the file to include the added lines below or use `cat` to view the 
+existing `short_transfer.sh` file: 
 
 <pre class="file"><code>#!/bin/bash
 # short_transfer.sh: a short discovery job
@@ -222,7 +220,8 @@ printf "Job number is" $2
 printf "Contents of $1 is "; cat $1
 cat $1 > output$2.txt
 echo
-echo "Working hard...als -l $PWD
+echo "Working hard... 
+ls -l $PWD
 sleep 20
 echo "Science complete!"
 </code></pre>
@@ -241,10 +240,12 @@ Once again, before submitting our job we should test it locally to ensure it run
 
 <pre class="term"><code>$ ./short_transfer.sh input.txt
 Start time: Tue Dec 11 10:19:12 CST 2018
-Job is running on node: loginNN.osgconnect.net
-Job running as user: uid=100279(alice) gid=1000(users) groups=1000(users),5532(connect),5782(osg),7021(osg.ConnectTrain)
+Job is running on node: ap50.ux.osg-htc.org
+Job running as user: uid=54161(alice), gid=5782(osg) groups=5782(osg),5513(osg.login-nodes),7158(osg.OSG-Staff)
 Job is running in directory: /home/alice/tutorial-quickstart
-The command line argument is: Contents of input.txt is "Hello World"Working hard...total 28
+The command line argument is: Contents of input.txt is "Hello World"
+Working hard
+total 28
 drwxrwxr-x 2 alice users   34 Oct 15 09:37 Images
 -rw-rw-r-- 1 alice users   13 Oct 15 09:37 input.txt
 drwxrwxr-x 2 alice users  114 Dec 11 09:50 log
@@ -272,7 +273,7 @@ log = job.log
 error = job.error
 output = job.output
 
-+JobDurationCategory = “Medium”
++JobDurationCategory = "Medium"
 
 request_cpus = 1
 request_memory = 1 GB
@@ -320,7 +321,7 @@ log = log/job.$(Cluster).log
 error = log/job.$(Cluster).$(Process)error
 output = log/job.$(Cluster).$(Process).output
 
-+JobDurationCategory = “Medium”
++JobDurationCategory = "Medium"
 
 request_cpus = 1
 request_memory = 1 GB
