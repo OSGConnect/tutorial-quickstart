@@ -1,14 +1,15 @@
-# We need the job to run our executable script, arguments and files.
-#  Also, we'll specify unique filenames for each job by using
-#  the job's 'cluster' value.
+# For this example, we'll specify unique filenames for each job by using
+#  the job's 'Process' value.
 executable = short_transfer.sh
-arguments = input.txt
-transfer_input_files = input.txt
-transfer_output_files = output.txt
+arguments = input.txt $(Process)
 
-error = log/job.$(Cluster).$(Process).error
+transfer_input_files = input.txt
+
+log = log/job.$(Cluster).log
+error = log/job.$(Cluster).$(Process)error
 output = log/job.$(Cluster).$(Process).output
-log = log/job.$(Cluster).$(Process).log
+
++JobDurationCategory = “Medium”
 
 request_cpus = 1
 request_memory = 1 GB
