@@ -155,32 +155,22 @@ $ condor_watch_q
 
 *Note*: To close condor_watch_q, hold down `Ctrl` and press C. 
 
-### View job history
-
-Once your job has finished, you can get information about its execution
-from the `condor_history` command. Unlike `condor_q`, you should provide 
-your username to the command, as well as limit the number of entries it
-returns, as shown below: 
-
-<pre class="term"><code>$ condor_history alice -limit 1
- ID      OWNER            SUBMITTED     RUN_TIME ST   COMPLETED CMD           
- 1441272.0   alice     08/10 14:18   0+00:00:29 C  08/10 14:19 /home/alice/tutorial-quickstart/short.sh 
-</code></pre>
-
-*Note*: You can see much more information about your job's final status
-using the `-long` option. 
-
 ### Check the job output
 
 Once your job has finished, you can look at the files that HTCondor has
 returned to the working directory. The names of these files were specified in our
 submit file. If everything was successful, it should have returned:
 
-* a log file from HTCondor for the job cluster: short.log
-* an output file for each job's output: short.output
-* an error file for each job's errors: short.error
+* a log file from HTCondor for the job cluster: `short.log`
+	* This file can tell you where a job ran, how long it ran, and what resources it used.
+	* If a job shows up as "held" in `condor_q`, this file will have a message 
+	that gives a reason why. 
+* an output file for each job's output: `short.output`
+	* This file can have useful messages that describe how the job progressed. 
+* an error file for each job's errors: `short.error`
+	* If the job encountered any errors, they will likely be in this file. 
 
-Read the output file. It should be something like this: 
+In this case, we will read the output file, which should contain the information printed by our script. It should look something like this: 
 
 <pre class="term"><code>$ cat short.output
 Start time: Mon Aug 10 20:18:56 UTC 2023
@@ -215,12 +205,12 @@ printf "Start time: "; /bin/date
 printf "Job is running on node: "; /bin/hostname
 printf "Job running as user: "; /usr/bin/id
 printf "Job is running in directory: "; /bin/pwd
-printf "The command line argument is: " $@
-printf "Job number is" $2
+printf "The command line argument is: "; echo $@
+printf "Job number is: "; echo $2
 printf "Contents of $1 is "; cat $1
 cat $1 > output$2.txt
 echo
-echo "Working hard... 
+echo "Working hard..."
 ls -l $PWD
 sleep 20
 echo "Science complete!"
@@ -243,18 +233,20 @@ Start time: Tue Dec 11 10:19:12 CST 2018
 Job is running on node: ap50.ux.osg-htc.org
 Job running as user: uid=54161(alice), gid=5782(osg) groups=5782(osg),5513(osg.login-nodes),7158(osg.OSG-Staff)
 Job is running in directory: /home/alice/tutorial-quickstart
-The command line argument is: Contents of input.txt is "Hello World"
+The command line argument is: input.txt
+Job number is: 
+Contents of input.txt is "Hello World"
 Working hard
 total 28
-drwxrwxr-x 2 alice users   34 Oct 15 09:37 Images
--rw-rw-r-- 1 alice users   13 Oct 15 09:37 input.txt
-drwxrwxr-x 2 alice users  114 Dec 11 09:50 log
--rw-r--r-- 1 alice users   13 Dec 11 10:19 output.txt
--rwxrwxr-x 1 alice users  291 Oct 15 09:37 short.sh
--rwxrwxr-x 1 alice users  390 Dec 11 10:18 short_transfer.sh
--rw-rw-r-- 1 alice users  806 Oct 15 09:37 tutorial01.submit
--rw-rw-r-- 1 alice users  547 Dec 11 09:49 tutorial02.submit
--rw-rw-r-- 1 alice users 1321 Oct 15 09:37 tutorial03.submit
+drwxrwxr-x 2 alice users   34 Aug 15 09:37 Images
+-rw-rw-r-- 1 alice users   13 Aug 15 09:37 input.txt
+drwxrwxr-x 2 alice users  114 Aug 11 09:50 log
+-rw-r--r-- 1 alice users   13 Aug 11 10:19 output.txt
+-rwxrwxr-x 1 alice users  291 Aug 15 09:37 short.sh
+-rwxrwxr-x 1 alice users  390 Aug 11 10:18 short_transfer.sh
+-rw-rw-r-- 1 alice users  806 Aug 15 09:37 tutorial01.submit
+-rw-rw-r-- 1 alice users  547 Aug 11 09:49 tutorial02.submit
+-rw-rw-r-- 1 alice users 1321 Aug 15 09:37 tutorial03.submit
 Science complete!
 </code></pre>
 
@@ -308,7 +300,16 @@ want to submit several jobs, we need to track these three files for each
 job. An easy way to do this is to add the `$(Cluster)` and `$(Process)`
 macros to the HTCondor submit file. Since this can make our working
 directory really messy with a large number of jobs, let's tell HTCondor
-to put the files in a directory called log. Here's what the third submit file looks like, called `tutorial03.submit`:
+to put the files in a directory called `log`. 
+
+We will also include the `$(Process)` value as a second argument to our 
+script, which will cause it to give our output files unique names. If you want to 
+try it out, you can do so like this: 
+
+<pre class="term"><code>$ ./short_transfer.sh input.txt 12</code></pre>
+
+Incorporating all these ideas, 
+here's what the third submit file looks like, called `tutorial03.submit`:
 
 <pre class="sub"><code># For this example, we'll specify unique filenames for each job by using
 #  the job's 'Process' value.
@@ -318,7 +319,7 @@ arguments = input.txt $(Process)
 transfer_input_files = input.txt
 
 log = log/job.$(Cluster).log
-error = log/job.$(Cluster).$(Process)error
+error = log/job.$(Cluster).$(Process).error
 output = log/job.$(Cluster).$(Process).output
 
 +JobDurationCategory = "Medium"
@@ -343,27 +344,15 @@ Submitting job(s)..........
 	
 Look at the output files in the log directory and notice how each job received its own separate output file:
 
-<pre class="term"><code>$ ls ./log
-job.1444786.0.error    job.1444786.1.error    job.1444786.2.error	  job.1444786.3.error	job.1444786.4.error    job.1444786.5.error    job.1444786.6.error	  job.1444786.7.error	job.1444786.8.error    job.1444786.9.error
-job.1444786.0.log     job.1444786.1.log     job.1444786.2.log	  job.1444786.3.log	job.1444786.4.log     job.1444786.5.log     job.1444786.6.log	  job.1444786.7.log	job.1444786.8.log     job.1444786.9.log
-job.1444786.0.output  job.1444786.1.output  job.1444786.2.output  job.1444786.3.output	job.1444786.4.output  job.1444786.5.output  job.1444786.6.output  job.1444786.7.output	job.1444786.8.output  job.1444786.9.output
+<pre class="term"><code>$ ls log
+job.1444786.0.error    job.1444786.3.error    job.1444786.6.error    job.1444786.9.error
+job.1444786.0.output  job.1444786.3.output  job.1444786.6.output  job.1444786.9.output
+job.1444786.2.error    job.1444786.4.error    job.1444786.7.error    job.1444786.log
+job.1444786.1.output  job.1444786.4.output  job.1444786.7.output
+job.1444786.2.error    job.1444786.5.error    job.1444786.8.error
+job.1444786.2.output  job.1444786.5.output  job.1444786.8.output
 </code></pre>
 
-### Where did jobs run? 
-
-It might be interesting to see where our jobs actually ran. To get that information for a single job, we can use the command `condor_history`. First, select a job you want to investigate and then run `condor_history -long jobid`. In this example, we will investigate the job ID 1444786.9. Again the output is quite long:
-
-	$ condor_history alice -limit 10 -long 1444786.9
-	BlockWriteKbytes = 0
-	BlockReads = 0
-	DiskUsage_RAW = 36
-	... 
-	MATCH_EXP_JOBGLIDEIN_ResourceName = "Georgia_Tech_PACE_CE_2"
-	...
-	
-Looking through here for a hostname, we can see that the parameter `MATCH_EXP_JOBGLIDEIN_ResourceName`. The output of this parameter is the slot our job ran on. In this example, our job ran on a slot at the Georgia Institute of Technology. 
-
-To visualize where multiple jobs have run, visit our [Finding OSG Locations](https://support.opensciencegrid.org/support/solutions/articles/12000061978-finding-osg-locations) tutorial. 
 
 ## Removing Jobs
 
@@ -381,12 +370,3 @@ all jobs belonging to the user. The `condor_rm` documenation has more
 details on using `condor_rm` including ways to remove jobs based on other
 constraints.
 
-## What's Next
-
-We recommend you read about how to steer your jobs with HTCondor job
-requirements - this will allow you to select good resources for your
-workload. Please see [this page](https://support.opensciencegrid.org/support/solutions/articles/5000633467-steer-your-jobs-with-htcondor-job-requirements)
-
-**Watch this video from the 2021 OSG Virtual School** for an introduction to HTC Job Execution with HTCondor:
-
-[<img src="https://raw.githubusercontent.com/OSGConnect/tutorial-quickstart/master/Images/HTCondor_Intro_Video_Thumbnail.png" width="500">](https://www.youtube.com/embed/9896xAhT4dY)

@@ -6,7 +6,7 @@ arguments = input.txt $(Process)
 transfer_input_files = input.txt
 
 log = log/job.$(Cluster).log
-error = log/job.$(Cluster).$(Process)error
+error = log/job.$(Cluster).$(Process).error
 output = log/job.$(Cluster).$(Process).output
 
 +JobDurationCategory = "Medium"
