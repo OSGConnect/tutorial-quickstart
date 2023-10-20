@@ -6,16 +6,19 @@ executable = short.sh
 #  terminal output (stdout) and error (stderr) created by our job.
 #  Similarly, we need to name the log file where HTCondor will save
 #  information about job execution steps.
+log = short.log
 error = short.error
 output = short.output
-log = short.log
 
-# We need to request the resources that this job will need:
+# This is the default category for jobs
++JobDurationCategory = "Medium"
+
+# The below are good base requirements for first testing jobs on OSG, 
+#  if you don't have a good idea of memory and disk usage.
 request_cpus = 1
-request_memory = 1 MB
-request_disk = 1 MB
+request_memory = 1 GB
+request_disk = 1 GB
 
 # The last line of a submit file indicates how many jobs of the above
 #  description should be queued. We'll start with one job.
 queue 1
-
