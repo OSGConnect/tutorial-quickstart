@@ -370,3 +370,9 @@ all jobs belonging to the user. The `condor_rm` documenation has more
 details on using `condor_rm` including ways to remove jobs based on other
 constraints.
 
+## Getting Your Work Running
+
+Now that you have some practice with running HTCondor jobs, consider 
+reviewing our [Getting Started 
+Roadmap](https://portal.osg-htc.org/documentation/htc_workloads/workload_planning/roadmap/)
+to see what next steps will get your own computational work running on the OSPool. 
